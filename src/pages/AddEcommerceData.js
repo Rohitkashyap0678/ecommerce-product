@@ -95,7 +95,7 @@ const AddEcommerceData = () => {
 
 
 
-  const categories = JSON.parse(localStorage.getItem("CategoryTypesDataTotalLength")) || {};
+  const categories = JSON.parse(localStorage.getItem("CategoryTypesDataTotalLength")) || [];
 
   const [customCategory, setCustomCategory] = useState("");
 
@@ -193,7 +193,7 @@ const AddEcommerceData = () => {
                   helperText={errors.category?.message}
                   onChange={handleCategoryChange}
                 >
-                  {categories.map((category) => (
+                  {categories?.map((category) => (
                     <MenuItem key={category} value={category}>
                       {category}
                     </MenuItem>

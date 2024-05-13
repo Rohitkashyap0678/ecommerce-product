@@ -16,7 +16,7 @@ const NotFound = () => {
         </Typography>
       </Box>
       <Box className="!mt-10 animate__animated animate__zoomIn">
-        <Link to="/">
+        <Link to="/dashboard">
           <Button
             className="!bg-red-600 !font-bold !text-base 9xl:!text-xl !rounded-md !capitalize !py-3 !px-12 9xl:!px-24 !m-auto !text-white"
             variant="contained"
