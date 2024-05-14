@@ -18,6 +18,9 @@ import NotFound from "./components/NotFound";
 import Dashboard from "./pages/Dashboard";
 import HomePage from "./pages/HomePage";
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import Account from "./pages/Account";
+import Profile from "./pages/Profile";
 
 const App = () => {
   const navigate = useNavigate();
@@ -36,44 +39,47 @@ const App = () => {
     }
   };
 
-  // const openDashboradPage = () => {
-  //   setIsLoggedIn(true);
-  //   navigate("/dashboard");
-  // };
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const panelType = localStorage.getItem("panelType");
     setIsLoggedIn(panelType !== null);
-  }, []);
-
-  // useEffect(() => {
-  //   const panelType = localStorage.getItem('panelType');
-  //   if (panelType) {
-  //     setIsLoggedIn(true);
-  //   }
-  // }, []);
+    if (!panelType) {
+      navigate("/");
+    }
+    // if (panelType) {
+    //   return (
+    //     <Navigate to={{ pathname: "/dashboard" }} />
+    //   );
+    // }
+    // if (panelType) {
+    //   navigate((-1), { replace: true });
+    //   // router.back()
+    // }
+  }, [navigate]);
 
   const openDashboardPage = () => {
     setIsLoggedIn(true);
-    navigate("/dashboard");
-    // navigate("/dashboard", { replace: true });
+    const panelType = localStorage.getItem("panelType");
+    if (panelType === "user") {
+      navigate("/products");
+    } else {
+      navigate("/dashboard");
+    }
   };
 
   const clearLocalStorageAndLogout = () => {
     localStorage.removeItem("panelType");
     setIsLoggedIn(false);
+    navigate("/");
   };
-
-  // if(!isLoggedIn){
-  //   navigate("/dashboard", { replace: true });
-  // }
 
   // const handleSubMenuClick = (e) => {
   //   const arrowParent = e.target.parentElement.parentElement;
   //   arrowParent.classList.toggle("showMenu");
   // };
+
+  const panelType = localStorage.getItem("panelType");
 
   return (
     <>
@@ -98,18 +104,19 @@ const App = () => {
               </Box>
 
               <ul className="nav-links">
-                <li
-                  onClick={closeSidebar}
-                  className="animate__flashh animate__animatedd"
-                >
-                  <NavLink to="/dashboard" activeClassName="active">
-                    <i className="bx animate__headShake  animate__animated bx-grid-alt"></i>
-                    <span className="animate__headShake  animate__animated link_name">
-                      Dashboard
-                    </span>
-                  </NavLink>
-                </li>
-
+                {panelType === "admin" && (
+                  <li
+                    onClick={closeSidebar}
+                    className="animate__flashh animate__animatedd"
+                  >
+                    <NavLink to="/dashboard" activeClassName="active">
+                      <i className="bx animate__headShake  animate__animated bx-grid-alt"></i>
+                      <span className="animate__headShake  animate__animated link_name">
+                        Dashboard
+                      </span>
+                    </NavLink>
+                  </li>
+                )}
                 <li
                   onClick={closeSidebar}
                   className="animate__flashh animate__animatedd"
@@ -166,28 +173,33 @@ const App = () => {
                   </NavLink>
                 </li>
 
-                <li
-                  onClick={closeSidebar}
-                  className="animate__flashh animate__animatedd"
-                >
-                  <NavLink activeClassName="active" to="/backend">
-                    <i className="bx animate__headShake  animate__animated bx-text"></i>
-                    <span className="link_name animate__headShake  animate__animated">
-                      Backend Form
-                    </span>
-                  </NavLink>
-                </li>
-                <li
-                  onClick={closeSidebar}
-                  className="animate__flashh animate__animatedd"
-                >
-                  <NavLink activeClassName="active" to="/analytics">
-                    <i className="bx animate__headShake  animate__animated bx-pie-chart-alt-2"></i>
-                    <span className="link_name animate__headShake  animate__animated">
-                      Analytics
-                    </span>
-                  </NavLink>
-                </li>
+                {panelType === "admin" && (
+                  <li
+                    onClick={closeSidebar}
+                    className="animate__flashh animate__animatedd"
+                  >
+                    <NavLink activeClassName="active" to="/backend">
+                      <i className="bx animate__headShake  animate__animated bx-text"></i>
+                      <span className="link_name animate__headShake  animate__animated">
+                        Backend Form
+                      </span>
+                    </NavLink>
+                  </li>
+                )}
+                {panelType === "admin" && (
+                  <li
+                    onClick={closeSidebar}
+                    className="animate__flashh animate__animatedd"
+                  >
+                    <NavLink activeClassName="active" to="/analytics">
+                      <i className="bx animate__headShake  animate__animated bx-pie-chart-alt-2"></i>
+                      <span className="link_name animate__headShake  animate__animated">
+                        Analytics
+                      </span>
+                    </NavLink>
+                  </li>
+                )}
+
                 <li
                   onClick={closeSidebar}
                   className="animate__flashh animate__animatedd"
@@ -199,19 +211,19 @@ const App = () => {
                     </span>
                   </NavLink>
                 </li>
-
-                <li
-                  onClick={closeSidebar}
-                  className="animate__flashh animate__animatedd"
-                >
-                  <NavLink activeClassName="active" to="/add-products">
-                    <i className="bx animate__headShake  animate__animated bx-add-to-queue"></i>
-                    <span className="link_name animate__headShake  animate__animated">
-                      Add Products
-                    </span>
-                  </NavLink>
-                </li>
-
+                {panelType === "admin" && (
+                  <li
+                    onClick={closeSidebar}
+                    className="animate__flashh animate__animatedd"
+                  >
+                    <NavLink activeClassName="active" to="/add-products">
+                      <i className="bx animate__headShake  animate__animated bx-add-to-queue"></i>
+                      <span className="link_name animate__headShake  animate__animated">
+                        Add Products
+                      </span>
+                    </NavLink>
+                  </li>
+                )}
                 <li
                   onClick={closeSidebar}
                   className="animate__flashh animate__animatedd"
@@ -223,7 +235,6 @@ const App = () => {
                     </span>
                   </NavLink>
                 </li>
-
                 <li
                   onClick={closeSidebar}
                   className="animate__flashh animate__animatedd"
@@ -235,7 +246,6 @@ const App = () => {
                     </span>
                   </NavLink>
                 </li>
-
                 <li
                   onClick={closeSidebar}
                   className="animate__flashh animate__animatedd"
@@ -247,19 +257,17 @@ const App = () => {
                     </span>
                   </NavLink>
                 </li>
-
                 <li
                   onClick={closeSidebar}
                   className="animate__flashh animate__animatedd"
                 >
-                  <NavLink activeClassName="active" to="/amount">
+                  <NavLink activeClassName="active" to="/account-panel">
                     <i className="bx animate__headShake  animate__animated bx-cog"></i>
                     <span className="link_name animate__headShake  animate__animated">
-                      Account
+                      Account Panel
                     </span>
                   </NavLink>
                 </li>
-
                 <li
                   onClick={closeSidebar}
                   className="animate__flashh animate__animatedd"
@@ -267,7 +275,6 @@ const App = () => {
                   <Box className="profile-details">
                     <Box className="profile-content">
                       <img
-                        // src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2pvYjEwMzQtZWxlbWVudC0wNi0zOTcucG5n.png"
                         src={ProfileImage}
                         alt="profileImg"
                       />
@@ -299,6 +306,8 @@ const App = () => {
                   <Routes>
                     <Route exact path="/dashboard" element={<Dashboard />} />
                     <Route path="/products" element={<Products />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/account-panel" element={<Account openDashboardPage={openDashboardPage}  />}  />
                     <Route path="/backend" element={<AddSignupBackend />} />
                     <Route path="/favourite" element={<Favourite />} />
                     <Route path="/category" element={<Category />} />

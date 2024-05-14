@@ -361,12 +361,12 @@ input:where([type='submit']):hover {
 }
 
 .sidebar .profile-details img {
-  height: 52px;
-  width: 52px;
-  object-fit: fill;
-  /* object-fit: cover; */
-  border-radius: 16px;
-  margin: 0 14px 0 12px;
+  height: 40px;
+  width: 40px;
+  /* object-fit: contain; */
+  object-fit: cover;
+  border-radius: 169px;
+  margin: 0 4px 0 12px;
   background: #1d1b31;
   transition: all 0.5s ease;
 }
@@ -381,6 +381,9 @@ input:where([type='submit']):hover {
   font-size: 15px;
   font-weight: 500;
   white-space: nowrap;
+  max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sidebar.close .profile-details i,
@@ -460,11 +463,41 @@ input:where([type='submit']):hover {
 }
 
 .textField-class>div>div,
+.textField-profile-description>div>div,
+.textField-profile-description>div,
 .textField-class>div {
   /* min-width: 400px; */
   width: 100% !important;
 }
 
+
+.textField-profile ,
+.textField-profile-description  {
+  border-bottom: 2px solid white !important;
+}
+.textField-profile ::after,
+.textField-profile-description ::after {
+  border-bottom: none !important;
+}
+
+.textField-profile-description input , .textField-profile-description textarea
+ {
+  font-weight: 600 !important;
+  letter-spacing: 1px !important;
+  font-size: 26px !important;
+  text-align: center !important;
+  line-height: 2.25rem !important;
+  color: white !important;
+}
+
+.textField-profile input {
+  font-weight: 600 !important;
+  letter-spacing: 1px !important;
+  font-size: 32px !important;
+  text-align: center !important;
+  line-height: 2.25rem !important;
+  color: white !important;
+}
 
 
 
@@ -578,7 +611,6 @@ input:where([type='submit']):hover {
 
 .transition-button {
   background-color: black;
-  color: white;
   border: none;
   padding: 8px 20px;
   border: 2px solid white;
@@ -586,10 +618,4 @@ input:where([type='submit']):hover {
   border-radius: 4px;
   cursor: pointer;
 
-}
-
-.transition-button:hover {
-  background-color: white;
-  color: black !important;
-  animation: colorChange 0.5s ease;
 }

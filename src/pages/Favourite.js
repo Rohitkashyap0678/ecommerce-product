@@ -32,12 +32,14 @@ const Favourite = () => {
     )
   );
 
+  // const panelType = localStorage.getItem("panelType")
   return (
     <Box className="container !m-auto pb-10 px-10">
       <CoomonHeaderTextButton
         ProductsName="Favourite"
         BUttonName="Add Favourite"
         LinkRoute="/products"
+        // panelType={panelType}
       />
 
       <Box className="">
