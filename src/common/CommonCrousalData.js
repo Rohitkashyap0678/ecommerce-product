@@ -6,6 +6,7 @@ import StarIcon from "@mui/icons-material/Star";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SliderSlick from "./SliderSlick";
+import LongMenu from "../ui/LongMenu";
 
 const CommonCrousalData = ({ data, toggleFavorite, favorites }) => {
   const renderStars = (rating) => {
@@ -58,28 +59,33 @@ const CommonCrousalData = ({ data, toggleFavorite, favorites }) => {
                     </Typography>
                     <Box className=" !items-center !flex">
                       {renderStars(items?.rating)}
-                      <span className="!text-black ml-2 mt-1">({items?.rating})</span>
+                      <span className="!text-black ml-2 mt-1">
+                        ({items?.rating})
+                      </span>
                     </Box>
                   </Box>
-                  <Box className="right-4 bg-black cursor-pointer rounded-full  top-[18px] border border-white !absolute">
-                    <i className="bx bx-dots-vertical-rounded relative top-[2px]"></i>
+                  <Box className="right-4 bg-black cursor-pointer rounded-full  top-[17px] border border-white !absolute">
+                    {/* <i className="bx bx-dots-vertical-rounded relative top-[2px]"></i> */}
+                    <span className="!relative !top-[2px]">
+                      <LongMenu data ={data} />
+                    </span>
                   </Box>
-                  <Box className="right-11 bg-black cursor-pointer rounded-full top-[18px] border border-white !absolute">
+                  <Box className="right-14 !w-7 !h-7 bg-black cursor-pointer rounded-full top-[18px] border border-white !absolute">
                     {favorites[items?.id] ? (
                       <FavoriteIcon
                         onClick={() => toggleFavorite(items?.id)}
-                        className="!p-[4px]"
+                        className="!p-[3px] !left-[1px] !top-[1px] !relative"
                       />
                     ) : (
                       <FavoriteBorderIcon
                         onClick={() => toggleFavorite(items?.id)}
-                        className="!p-[4px]"
+                        className="!p-[3px] !left-[1px] !top-[1px] !relative"
                       />
                     )}
                   </Box>
                   <Typography
                     variant="h6"
-                    className="text-white font-semibold py-1 px-2 !text-sm right-20 bg-black  top-4 border-2 rounded-md border-white !absolute"
+                    className="text-white font-semibold py-1 px-2 !text-sm right-24 bg-black  top-4 border-2 rounded-md border-white !absolute"
                   >
                     {items?.category}
                   </Typography>

@@ -338,7 +338,8 @@ input:where([type='submit']):hover {
   width: 260px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 6px !important;
+  /* justify-content: space-between; */
   background: #1d1b31;
   padding: 12px 0;
   transition: all 0.5s ease;
@@ -363,6 +364,8 @@ input:where([type='submit']):hover {
 .sidebar .profile-details img {
   height: 40px;
   width: 40px;
+  min-height: 40px;
+  min-width: 40px;
   /* object-fit: contain; */
   object-fit: cover;
   border-radius: 169px;
@@ -617,5 +620,21 @@ input:where([type='submit']):hover {
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
-
+  /* transition: background-color 4s ease-in-out !important; */
 }
+
+.button-save{
+transition: background-color 0.4s ease-out 100ms !important;
+}
+.button-save:hover {
+  color: black !important;
+  background-color: white !important;
+}
+
+.edit-chip-profile span {
+  color: white !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+

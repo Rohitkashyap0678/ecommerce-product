@@ -4,6 +4,7 @@ import {
   Route,
   Routes,
   NavLink,
+  Link,
 } from "react-router-dom";
 import ProfileImage from "./assets/ProfileImage.JPG";
 import Favourite from "./pages/Favourite";
@@ -21,10 +22,43 @@ import { useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import Account from "./pages/Account";
 import Profile from "./pages/Profile";
+import profileBlack from "./assets/profileBlack.jpeg";
+import CartDetails from "./pages/CartDetails";
 
 const App = () => {
   const navigate = useNavigate();
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+
+
+  // const [profileDetail, setProfileDetail] = useState({});
+  // useEffect(() => {
+  //   const storedProfileDetail = JSON.parse(localStorage.getItem("profileData")) || {};
+  //   setProfileDetail(storedProfileDetail);
+  // }, []);
+  const [profileDetail, setProfileDetail] = useState({});
+
+  useEffect(() => {
+    const storedProfileDetail = JSON.parse(localStorage.getItem("profileData")) || {};
+    setProfileDetail(storedProfileDetail);
+
+    const handleStorageChange = (event) => {
+      if (event.key === "profileData") {
+        const updatedProfileDetail = JSON.parse(event.newValue) || {};
+        setProfileDetail(updatedProfileDetail);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+
+
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(
     window.innerWidth <= 991 ? false : true
   );
@@ -204,7 +238,7 @@ const App = () => {
                   onClick={closeSidebar}
                   className="animate__flashh animate__animatedd"
                 >
-                  <NavLink activeClassName="active" to="cart-details">
+                  <NavLink activeClassName="active" to="/cart-details">
                     <i className="bx animate__headShake  animate__animated bx-cart"></i>
                     <span className="link_name animate__headShake  animate__animated">
                       Cart Details
@@ -273,19 +307,30 @@ const App = () => {
                   className="animate__flashh animate__animatedd"
                 >
                   <Box className="profile-details">
-                    <Box className="profile-content">
-                      <img
-                        src={ProfileImage}
-                        alt="profileImg"
-                      />
+                    <Box className="profile-content ">
+                      <Link to="/profile">
+                        <img
+                          src={profileDetail?.profileImage || profileBlack}
+                          alt="profileImg"
+                          className="!border-white !border-2"
+                        />
+                      </Link>
                     </Box>
                     <Box className="name-job">
-                      <Box className="profile_name">Rohit Kashyap</Box>
-                      <Box className="job">Developer</Box>
+                      <Box className="profile_name">
+                        <Link to="/profile">
+                          {profileDetail?.name || "Your Full Name "}
+                        </Link>
+                      </Box>
+                      <Box className="job">
+                        <Link to="/profile">
+                          {profileDetail?.occupation || "Your Profile"}
+                        </Link>
+                      </Box>
                     </Box>
                     <i
                       onClick={clearLocalStorageAndLogout}
-                      className="bx bx-log-out"
+                      className="bx bx-log-out !ml-auto"
                     ></i>
                   </Box>
                 </li>
@@ -307,7 +352,13 @@ const App = () => {
                     <Route exact path="/dashboard" element={<Dashboard />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/account-panel" element={<Account openDashboardPage={openDashboardPage}  />}  />
+                    <Route path="/cart-details" element={<CartDetails />} />
+                    <Route
+                      path="/account-panel"
+                      element={
+                        <Account openDashboardPage={openDashboardPage} />
+                      }
+                    />
                     <Route path="/backend" element={<AddSignupBackend />} />
                     <Route path="/favourite" element={<Favourite />} />
                     <Route path="/category" element={<Category />} />
