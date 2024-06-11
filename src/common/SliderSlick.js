@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 const SliderSlick = ({ silderImage, thumbNail, className }) => {
     var settings = {
         dots: true,
-        infinite: true,
+        infinite: true, 
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,

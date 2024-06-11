@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
@@ -7,6 +7,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SliderSlick from "./SliderSlick";
 import LongMenu from "../ui/LongMenu";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 
 const CommonCrousalData = ({ data, toggleFavorite, favorites }) => {
   const renderStars = (rating) => {
@@ -44,15 +46,17 @@ const CommonCrousalData = ({ data, toggleFavorite, favorites }) => {
 
           return (
             <>
+
               <Box
                 key={index}
-                className="!border-2 animate__animated  animate__zoomIn  !border-white !relative"
+                className="!border-2 animate__animated animate__zoomIn !bg-white !border-white !relative"
               >
+             
                 <SliderSlick
                   silderImage={items?.images}
                   thumbNail={items?.thumbnail}
                 />
-                <Box className="p-5 min-h-[248px] bg-white">
+                <Box className="p-5 min-h-[248px]  bg-white">
                   <Box className="!grid 9xl:!flex !gap-2  !mt-6 !items-center justify-between">
                     <Typography variant="h6" className="text-black !text-lg">
                       {items?.brand}
@@ -67,7 +71,7 @@ const CommonCrousalData = ({ data, toggleFavorite, favorites }) => {
                   <Box className="right-4 bg-black cursor-pointer rounded-full  top-[17px] border border-white !absolute">
                     {/* <i className="bx bx-dots-vertical-rounded relative top-[2px]"></i> */}
                     <span className="!relative !top-[2px]">
-                      <LongMenu data ={data} />
+                      <LongMenu data={data} />
                     </span>
                   </Box>
                   <Box className="right-14 !w-7 !h-7 bg-black cursor-pointer rounded-full top-[18px] border border-white !absolute">
@@ -116,10 +120,21 @@ const CommonCrousalData = ({ data, toggleFavorite, favorites }) => {
                   >
                     Rs {discountedPrice}
                   </Typography>
-                  <Typography variant="h6" className="!text-sm !text-gray-400">
+                  <Typography
+                    variant="h6"
+                    className="!text-sm !mb-12 !text-gray-400 two-liner-ellipsis"
+                  >
                     {items?.description}
                   </Typography>
-                  <Typography
+                  <Box className="!flex !absolute !left-0 !px-3 !w-full !bottom-0 !gap-3 !items-center my-3">
+                    <Button className="!text-black !flex hoverButtonBuyProduct  !items-center !py-2 !gap-2 !bg-blackk !w-full !capitalize !text-sm 9xl:!text-base !font-semibold">
+                      <LocalMallIcon className="!w-5 !h-5" />Buy Product
+                    </Button>
+                    <Button className="!font-semibold !gap-2  !item-center !py-2 !flex !capitalize  !w-full !text-sm 9xl:!text-base !bg-black !text-white">
+                      <ShoppingCartIcon className="!w-5 !h-5" /> Add To Cart
+                    </Button>
+                  </Box>
+                  {/* <Typography
                     variant="h6"
                     className="!text-sm !mt-4 !text-gray-400 !text-ellipsis !overflow-hidden !whitespace-nowrap !py-1 !border-red-600  !border-2 "
                   >
@@ -127,9 +142,11 @@ const CommonCrousalData = ({ data, toggleFavorite, favorites }) => {
                       &nbsp;Unique Id:{" "}
                     </span>{" "}
                     {items?.id}
-                  </Typography>
+                  </Typography> */}
                 </Box>
+
               </Box>
+
             </>
           );
         })}

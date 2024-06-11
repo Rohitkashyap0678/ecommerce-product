@@ -33,7 +33,7 @@ const HomePage = ({ openDashboardPage }) => {
             <Grid
               container
               spacing={3}
-              className="breakPointLargeWidth !m-0 !w-full"
+              className="breakPointLargeWidth !m-0 !w-full" 
             >
               <Grid
                 className="animate__zoomIn animate__animated !p-0"

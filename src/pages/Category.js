@@ -8,17 +8,24 @@ import Select from "@mui/material/Select";
 import { makeStyles } from "@mui/styles";
 import CoomonHeaderTextButton from "../common/CoomonHeaderTextButton";
 import CommonCrousalData from "../common/CommonCrousalData";
+import Toast from "../common/Toast";
 
 const useStyles = makeStyles({
   menuPaper: {
-    borderRadius: "8px",
-    border: "4px solid",
+    borderRadius: "0px",
+    top: "215px",
+    maxHeight: "400px",
+    border: "4px solid white",
+    // boxShadow: "6px 6px 54px 0 rgba(255, 255, 255, 0.6)",
   },
 });
 
 const Category = () => {
   const classes = useStyles();
   const [favorites, setFavorites] = useState({});
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("");
+  const [toastText, setToastText] = useState("");
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
     setFavorites(storedFavorites);
@@ -45,16 +52,45 @@ const Category = () => {
     .concat(jsonStoreData)
     .filter((item) => item.category === categoryOptionSelecter);
 
-  const handleToggleFavorite = (id) => {
-    const updatedFavorites = { ...favorites };
-    if (updatedFavorites[id]) {
-      delete updatedFavorites[id];
-    } else {
-      updatedFavorites[id] = true;
-    }
-    setFavorites(updatedFavorites);
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-  };
+    const handleToggleFavorite = (id) => {
+      const updatedFavorites = { ...favorites };
+      let message = "";
+      let type = "";
+  
+      if (updatedFavorites[id]) {
+        delete updatedFavorites[id];
+        message = "Product removed from favorites!";
+        type = "warning";
+      } else {
+        updatedFavorites[id] = true;
+        message = "Product added to favorites!";
+        type = "success";
+      }
+  
+      setFavorites(updatedFavorites);
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  
+      setShowToast(true);
+      setToastType(type);
+      setToastText(message);
+  
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+    };
+  
+
+
+  // const handleToggleFavorite = (id) => {
+  //   const updatedFavorites = { ...favorites };
+  //   if (updatedFavorites[id]) {
+  //     delete updatedFavorites[id];
+  //   } else {
+  //     updatedFavorites[id] = true;
+  //   }
+  //   setFavorites(updatedFavorites);
+  //   localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  // };
 
   // localStorage.setItem("CategoryDataTotalLength", JSON.stringify(findCategoryData.map((items) => items.category)))
   localStorage.setItem("CategoryTypesDataTotalLength", JSON.stringify(dataCategoryMapFunction))
@@ -78,15 +114,18 @@ const Category = () => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  className="twilio-selector"
+                  className="twilio-selector category-select-order-list"
                   label="Select Category"
                   onChange={changeCategoryOptionSelect}
                   value={categoryOptionSelecter}
-                  MenuProps={{ classes: { paper: classes.menuPaper } }}
+                  // MenuProps={{ classes: { paper: classes.menuPaper } }}
+                  MenuProps= {{ 
+                    classes: { paper: `${classes.menuPaper} categorySelectListing` }
+                   }}
                 >
                   {dataCategoryMapFunction.map((categoryMaped, index) => {
                     return (
-                      <MenuItem key={index} value={categoryMaped}>
+                      <MenuItem key={index} value={categoryMaped} className="category-selector-listing">
                         {categoryMaped}
                       </MenuItem>
                     );
@@ -109,6 +148,7 @@ const Category = () => {
                   favorites={favorites}
                   data={findCategoryData}
                 />
+                {showToast && <Toast type={toastType} text={toastText} />}
               </>
             ) : (
               <>

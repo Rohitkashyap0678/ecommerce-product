@@ -153,7 +153,7 @@ const App = () => {
                 )}
                 <li
                   onClick={closeSidebar}
-                  className="animate__flashh animate__animatedd"
+                  className="animate__flashh  animate__animatedd"
                 >
                   <NavLink to="/products" activeClassName="active">
                     <i className="bx animate__headShake  animate__animated bx-data"></i>

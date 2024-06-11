@@ -637,4 +637,136 @@ transition: background-color 0.4s ease-out 100ms !important;
   padding-right: 10px !important;
 }
 
+.two-liner-ellipsis{
+  display: -webkit-box;
+  max-width: 100%;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+
+
+
+
+
+
+
+
+
+
+
+
+.card-zoom-effect{
+  transition: transform 0.5s;
+}
+
+.card-zoom-effect:hover {
+  transform: scale(1.1);
+}
+
+.hoverButtonBuyProduct {
+  transition: 0.5s ease-in-out;
+  border: 2px solid black !important;
+  animation: pulse 1.8s infinite 3s cubic-bezier(0.25, 0, 0, 0.1);
+  box-shadow: 0 0 0 0 black;
+}
+
+.hoverButtonBuyProduct:hover {
+  animation: pulse 1.8s infinite 3s cubic-bezier(0.25, 0, 0, 0.1);
+  box-shadow: 0 0 0 0 black;
+  color: white !important;
+  transition: 0.5s ease-in-out;
+  background-color: black !important;
+}
+
+
+
+
+
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
+  }
+}
+
+
+
+
+.hover-underline-animation, .sidebar > ul > li {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+.hover-underline-animation:after , .sidebar > ul > li:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.5s ease-out;
+}
+
+.hover-underline-animation:hover:after , .sidebar > ul > li:hover:after{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* .primary-hover-eas-out {
+  transition: 0.5s ease-in-out;
+  animation: pulse 2s infinite 3s cubic-bezier(0.25, 0, 0, 1);
+  background: white;
+  color: var(--primary) !important;
+}
+
+.primary-hover-eas-out:hover {
+  animation: pulse 2s infinite 3s cubic-bezier(0.25, 0, 0, 1);
+  background: var(--primary) !important;
+  color: white !important;
+  transition: 0.5s ease-in-out;
+} */
+
+
+
+
+.toast-slide {
+  animation: slideInRight 0.5s ease forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+.categorySelectListing > ul > li {
+  font-weight: 700;
+  color: white !important;
+}
+
+.categorySelectListing{
+  background-color: black !important;
+  /* font-weight: 800; */
+}
+
+
+.categorySelectListing .Mui-selected{
+background: white !important;
+color: black !important;
+}
+
+/* .categorySelectListing .Mui-selected:hover{
+  background-color: white !important;
+} */

@@ -52,7 +52,7 @@ const Profile = () => {
   useEffect(() => {
     const storedProfileDetail =
       JSON.parse(localStorage.getItem("profileData")) || {};
-    setProfileDetail(storedProfileDetail);
+    setProfileDetail(storedProfileDetail); 
   }, []);
 
   // console.log(profileDetail?.profileImage, "profileDetail");

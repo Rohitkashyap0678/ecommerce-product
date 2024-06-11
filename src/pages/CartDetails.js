@@ -20,7 +20,7 @@ const CartDetails = ({ data }) => {
   localStorage.setItem("jsondataStore", JSON.stringify(productsData));
   const jsonStoreData = JSON.parse(localStorage.getItem("jsondataStore"));
   const jsonDataShowFunction = jsonStoreData;
-  const dataRatingFromJsondata = jsonDataShowFunction?.map(
+  const dataRatingFromJsondata = jsonDataShowFunction?.map( 
     (jsonDataShowFunction) => {
       if (jsonDataShowFunction?.rating === 5) {
         return jsonDataShowFunction?.rating;
